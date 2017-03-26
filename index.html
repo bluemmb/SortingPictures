@@ -1,0 +1,137 @@
+
+<html>
+<head>
+    <link href="style/bootstrap.css" rel="stylesheet" />
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link href="style/box_shadows.css" rel="stylesheet" />
+</head>
+
+<body style="background-color:#eef; overflow-y:scroll;">
+    
+    <div id="selecting" style="margin-bottom:430px;">
+        <div style="height:400px; padding:50px 0px 10px 0px; text-align:center;">
+            <div id="div1" class="box box1 shadow2"><img id="img1" onclick="select('>')" src="" style="max-width:100%; max-height:100%;"></div>
+            <div id="div2" class="box box1 shadow22"><img id="img2" onclick="select('<')" src="" style="max-width:100%; max-height:100%;"></div>
+        </div>
+        
+        <h3 style="text-align:center; color:#236;">
+            Select the one you like more ...
+        </h3>
+    </div>
+    
+    <div id="result" style="display:none; text-align:center;">
+        <h4 style="text-align:center; color:#236; font-weight:bold;">
+            Yey ... We are Done, Check out your list :)
+        </h4>
+        
+        <div style="height:620px;">
+            <span style="font-size:130px; color:#ccd; margin-right:20px; margin-top:10px;">#1</span><div class="box-first box1 shadow2"><img id="first" src="" style="max-width:100%; max-height:100%;"></div></br>
+            <span style="font-size:100px; color:#ccd; margin-right:20px; margin-top:10px;">#2</span><div class="box-second box1 shadow2"><img id="second" src="" style="max-width:100%; max-height:100%;"></div></br>
+            <span style="font-size:70px; color:#ccd; margin-right:20px; margin-top:10px;">#3</span><div class="box-third box1 shadow2"><img id="third" src="" style="max-width:100%; max-height:100%;"></div></br>
+        </div>
+        
+        <h4 style="text-align:left; color:#236; font-weight:bold; padding-left:15px;">
+            The rest of the pictures ...
+        </h4>
+        <div id="extra" style="overflow-x:scroll; overflow-y:hidden; background-color:#d4d4e6; text-align:left; 
+                                padding:10px; box-shadow:0px 0px 2px #7a7979; margin:20px 0px; height:150px;">
+            
+        </div>
+    </div>
+    
+    <script src="js/bucket.js"></script>
+    <script src="js/mixer.js"></script>
+    <script src="js/sorter.js"></script>
+    <script type="text/javascript">
+        var s = new Sorter();
+        s.add( ["01.jpg"] );
+        s.add( ["02.jpg"] );
+        s.add( ["03.jpg"] );
+        s.add( ["04.jpg"] );
+        s.add( ["05.jpg"] );
+        s.add( ["06.jpg"] );
+        s.add( ["07.jpg"] );
+        s.add( ["08.jpg"] );
+        // s.add( ["09.jpg"] );
+        // s.add( ["10.jpg"] );
+        // s.add( ["11.jpg"] );
+        
+        var reversed = false;
+        
+        function showNext()
+        {
+            if ( s.isDone() == false )
+            {
+                var vs = s.next();
+                var fi = vs.first;
+                var se = vs.second;
+                
+                var rnd = Math.floor( Math.random() * 2 );
+                if ( rnd == 1 )
+                {
+                    reversed = true;
+                    var t = fi;
+                    fi = se;
+                    se = t;
+                }
+                else 
+                {
+                    reversed = false;
+                }
+                
+                var div2 = $( '#div2' );
+                var div1 = $( '#div1' );
+                
+                div1.removeClass( 'box' ).addClass( 'box-empty' );
+                div2.removeClass( 'box' ).addClass( 'box-empty' );
+                
+                setTimeout( function() { 
+                     $( '#img1' ).attr( 'src' , 'pics/'+fi );
+                     $( '#img2' ).attr( 'src' , 'pics/'+se );
+                     
+                     setTimeout( function() {
+                         div1.addClass( 'box' ).removeClass( 'box-empty' );
+                         div2.addClass( 'box' ).removeClass( 'box-empty' );
+                     } , 300 );
+                }, 300 );
+            }
+            else
+            {
+                setTimeout( function() {
+                    $( '#selecting' ).animate( { "margin-top" : "-850px" }, { duration: "slow" });
+                    $( '#result' ).animate( { opacity : "toggle" } , { duration : "slow" } );
+                    
+                    var sorted = s.getSorterResult();
+                    var cnt = sorted.length;
+                    if ( cnt-1 >= 0 ) $( '#first' ).attr( 'src' , 'pics/'+sorted[cnt-1] );
+                    if ( cnt-2 >= 0 ) $( '#second' ).attr( 'src' , 'pics/'+sorted[cnt-2] );
+                    if ( cnt-3 >= 0 ) $( '#third' ).attr( 'src' , 'pics/'+sorted[cnt-3] );
+                    
+                    var extra = $( '#extra' );
+                    for ( var i=cnt-4 ; i>=0 ; i-- )
+                    {
+                        var nue = "<div class='box-small box1 shadow2'><img style='max-width:100%; max-height:100%;' src='pics/" + sorted[i] + "' /></div>";
+                        nue = $( nue );
+                        nue.appendTo( extra );
+                    }
+                    
+                } , 500 );
+            }
+        }
+        
+        function select( c )
+        {
+            if ( reversed ) 
+                c = (c=='>') ? ('<') : ('>');
+                            
+            if ( s.reply( c ) )
+                showNext();
+        }
+        
+        showNext();
+        
+    </script>
+    
+</body>
+</html>
