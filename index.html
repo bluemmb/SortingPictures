@@ -16,7 +16,7 @@
         </div>
         
         <h3 style="text-align:center; color:#236;">
-            Select the one you like more more more more ...
+            Select the one you like more ...
         </h3>
     </div>
     
@@ -45,17 +45,18 @@
     <script src="js/sorter.js"></script>
     <script type="text/javascript">
         var s = new Sorter();
-        s.add( ["01.jpg"] );
-        s.add( ["02.jpg"] );
-        s.add( ["03.jpg"] );
-        s.add( ["04.jpg"] );
-        s.add( ["05.jpg"] );
-        s.add( ["06.jpg"] );
-        s.add( ["07.jpg"] );
-        s.add( ["08.jpg"] );
-        // s.add( ["09.jpg"] );
-        // s.add( ["10.jpg"] );
-        // s.add( ["11.jpg"] );
+        var body = $("body");
+        s.add( ["01.jpg"] ); $("<img src='pics/01.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["02.jpg"] ); $("<img src='pics/02.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["03.jpg"] ); $("<img src='pics/03.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["04.jpg"] ); $("<img src='pics/04.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["05.jpg"] ); $("<img src='pics/05.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["06.jpg"] ); $("<img src='pics/06.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["07.jpg"] ); $("<img src='pics/07.jpg' style='display:none;'/>").appendTo(body);
+        s.add( ["08.jpg"] ); $("<img src='pics/08.jpg' style='display:none;'/>").appendTo(body);
+        // s.add( ["09.jpg"] ); $("<img src='pics/09.jpg' style='display:none;'/>").appendTo(body);
+        // s.add( ["10.jpg"] ); $("<img src='pics/10.jpg' style='display:none;'/>").appendTo(body);
+        // s.add( ["11.jpg"] ); $("<img src='pics/11.jpg' style='display:none;'/>").appendTo(body);
         
         var reversed = false;
         
