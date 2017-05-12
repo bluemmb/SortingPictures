@@ -10,7 +10,7 @@ function getRandom( l , r )
 /*
 class Mixer
 	
-	This class gives two sorted array of objects and tries to mix them together, with inserting
+	This class gets two sorted array of objects and tries to mix them together, with inserting
 	the second ones objects in first ones.
 	
 	The algorithm for merging two arrays is like doing Parallel Binary Searches.
