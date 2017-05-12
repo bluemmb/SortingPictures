@@ -3,7 +3,7 @@
 class Sorter
 
 	This class is the main class of the algorithm.
-	It gives the inputs, manage them with pairing them for Mixers, managing Mixers, ...
+	It gets the inputs, manages them with pairing them for Mixers, manages the Mixers, ...
 */
 
 
